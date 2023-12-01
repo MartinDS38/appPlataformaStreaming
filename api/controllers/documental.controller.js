@@ -126,6 +126,39 @@ exports.delete = (req, res) => {
   });
 };
 
+exports.getFavoritos = (req, res) => {
+  Documental.getFavoritosDetallados(req.params.userId, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Error al buscar los documentales."
+      });
+    else res.send({ "status": 200, "data": data });
+  });
+};
+
+exports.getVistos = (req, res) => {
+  Documental.getVistosDetallados(req.params.userId, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Error al buscar los documentales."
+      });
+    else res.send({ "status": 200, "data": data });
+  });
+};
+
+exports.buscar = (req, res) => {
+  Documental.buscar(req.params.query, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Error al buscar los documentales."
+      });
+    else res.send({ "status": 200, "data": data });
+  });
+};
+
 exports.getIdCat = (req, res) => {
   Documental.findByIdCat(req.params.id, (err, data) => {
     if (err) {

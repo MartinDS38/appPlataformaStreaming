@@ -48,6 +48,9 @@ app.get("/recientes", Documentales.getRecientes)
 app.get("/recientes/:limit", Documentales.getRecientes)
 app.get("/proximos",Documentales.getProximos)
 app.get("/proximos/:limit",Documentales.getProximos)
+app.get("/favoritos/:userId", Documentales.getFavoritos)
+app.get("/vistos/:userId", Documentales.getVistos)
+app.get("/buscar/:query", Documentales.buscar)
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

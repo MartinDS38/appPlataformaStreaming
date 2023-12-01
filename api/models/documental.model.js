@@ -30,23 +30,23 @@ Documental.create = (newDoc, result) => {
 Documental.findById = (id, result) => {
     sql.query(`SELECT * FROM documental WHERE id = ${id}`, (err, res) => {
         if (err) {
-          console.log("Error: ", err);
-          result(err, null);
-          return;
+            console.log("Error: ", err);
+            result(err, null);
+            return;
         }
-    
+
         if (res.length) {
-          // Parsea la primera fila a JSON antes de llamar a la función result
-          const jsonData = JSON.parse(JSON.stringify(res[0]));
-    
-          console.log("Documental encontrado: ", jsonData);
-          result(null, jsonData);
-          return;
+            // Parsea la primera fila a JSON antes de llamar a la función result
+            const jsonData = JSON.parse(JSON.stringify(res[0]));
+
+            console.log("Documental encontrado: ", jsonData);
+            result(null, jsonData);
+            return;
         }
-    
+
         // not found Tutorial with the id
         result({ kind: "not_found" }, null);
-      });
+    });
 };
 
 Documental.getAll = (result) => {
@@ -139,20 +139,20 @@ Documental.findByIdCat = (id, result) => {
 
 Documental.findByIdRegion = (id, result) => {
     let query = `SELECT * FROM documental inner join documentalxregion ON documental.id = documentalxregion.id_documental WHERE id_region = ${id}`
-        sql.query(query, (err, res) => {
-            if (err) {
-                console.log("Error: ", err);
-                result(null, err);
-                return;
-            }
-    
-            const filasJSON = res.map((fila) => {
-                return JSON.parse(JSON.stringify(fila));
-            });
-    
-            console.log("Documentales encontrados: ", filasJSON);
-            result(null, filasJSON);
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("Error: ", err);
+            result(null, err);
+            return;
+        }
+
+        const filasJSON = res.map((fila) => {
+            return JSON.parse(JSON.stringify(fila));
         });
+
+        console.log("Documentales encontrados: ", filasJSON);
+        result(null, filasJSON);
+    });
 };
 
 Documental.findByIdMpaa = (id, result) => {
@@ -190,8 +190,42 @@ Documental.getFavoritos = (idUsuario, result) => {
     });
 }
 
+Documental.getFavoritosDetallados = (idUsuario, result) => {
+    sql.query(`SELECT * FROM documental inner join favorito on id = id_documental WHERE id_usuario = ${idUsuario}`, (err, res) => {
+        if (err) {
+            console.log("Error: ", err);
+            result(err, null);
+            return;
+        }
+
+        const filasJSON = res.map((fila) => {
+            return JSON.parse(JSON.stringify(fila));
+        });
+
+        console.log("Documentales encontrados: ", filasJSON);
+        result(null, filasJSON);
+    });
+}
+
 Documental.getVistos = (idUsuario, result) => {
     sql.query(`SELECT id_documental FROM visto WHERE id_usuario = ${idUsuario}`, (err, res) => {
+        if (err) {
+            console.log("Error: ", err);
+            result(err, null);
+            return;
+        }
+
+        const filasJSON = res.map((fila) => {
+            return JSON.parse(JSON.stringify(fila));
+        });
+
+        console.log("Documentales encontrados: ", filasJSON);
+        result(null, filasJSON);
+    });
+}
+
+Documental.getVistosDetallados = (idUsuario, result) => {
+    sql.query(`SELECT * FROM documental inner join visto on id = id_documental WHERE id_usuario = ${idUsuario}`, (err, res) => {
         if (err) {
             console.log("Error: ", err);
             result(err, null);
@@ -244,8 +278,8 @@ Documental.getRegiones = (idDoc, result) => {
 Documental.getRecientes = (limit, result) => {
     let query = `SELECT * FROM documental WHERE fecha_estreno <= NOW() ORDER BY fecha_estreno DESC`
 
-    if(limit != null)
-        query += ' LIMIT '+limit
+    if (limit != null)
+        query += ' LIMIT ' + limit
 
     sql.query(query, (err, res) => {
         if (err) {
@@ -266,8 +300,27 @@ Documental.getRecientes = (limit, result) => {
 Documental.getProximos = (limit, result) => {
     let query = `SELECT * FROM documental WHERE fecha_estreno >= NOW() ORDER BY fecha_estreno ASC`
 
-    if(limit != null)
-        query += ' LIMIT '+limit
+    if (limit != null)
+        query += ' LIMIT ' + limit
+
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("Error: ", err);
+            result(err, null);
+            return;
+        }
+
+        const filasJSON = res.map((fila) => {
+            return JSON.parse(JSON.stringify(fila));
+        });
+
+        console.log("Documentales encontrados: ", filasJSON);
+        result(null, filasJSON);
+    });
+}
+
+Documental.buscar = (busq, result) => {
+    let query = `SELECT * FROM documental WHERE titulo LIKE '%${busq}%'`;
 
     sql.query(query, (err, res) => {
         if (err) {

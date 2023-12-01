@@ -1,19 +1,25 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // Asegúrate de tener instalada la librería correspondiente
+import { View, TouchableOpacity, Text } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 
 const FooterBar = () => {
+  const navigation = useNavigation();
+
   const handleSearchPress = () => {
-    // Lógica cuando se presiona la opción de búsqueda
-    console.log('Buscar');
+    navigation.navigate("Busqueda");
   };
 
   const handleFavoritesPress = () => {
-    // Lógica cuando se presiona la opción de favoritos
-    console.log('Favoritos');
+    navigation.navigate("Favoritos");
   };
+
+  const handleVistosPress = () => {
+    navigation.navigate("Vistos");
+  }
 
   return (
     <View style={styles.footer}>
@@ -21,13 +27,17 @@ const FooterBar = () => {
         <Ionicons name="search" size={24} color="black" />
         <Text>Buscar</Text>
       </TouchableOpacity>
-      
+
       <TouchableOpacity style={styles.footerOption} onPress={handleFavoritesPress}>
         <Ionicons name="heart" size={24} color="red" />
         <Text>Favoritos</Text>
       </TouchableOpacity>
-      
-      {/* Agrega más opciones según tus necesidades */}
+
+      <TouchableOpacity style={styles.footerOption} onPress={handleVistosPress}>
+        <Ionicons name="eye" size={24} color="blue" />
+        <Text>Vistos</Text>
+      </TouchableOpacity>
+
     </View>
   );
 };

@@ -26,6 +26,15 @@ const styles = StyleSheet.create({
             alignItems: 'center',
             justifyContent: 'center',
       },
+      containerListav: {
+            flex: 1,
+            width: '100%',
+            marginTop: 80,
+      },
+      containerListav2: {
+            flex: 1,
+            width: '100%',
+      },
       listContainer: {
             width: '100%',
             marginBottom: 60,
@@ -153,6 +162,34 @@ const styles = StyleSheet.create({
       video: {
             width: '100%',
             aspectRatio: 16 / 9,
+      },
+      busquedaContainer: {
+            flex: 1,
+            backgroundColor: '#888',
+      },
+      searchContainer: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            borderWidth: 1,
+            borderColor: '#ccc',
+            borderRadius: 8,
+            marginTop: 80,
+            marginBottom: 16,
+            paddingVertical: 8,
+            paddingHorizontal: 16,
+            marginHorizontal: 16,
+      },
+      searchIcon: {
+            marginRight: 8,
+      },
+      searchInput: {
+            flex: 1,
+      },
+      searchButton: {
+            backgroundColor: '#555',
+            padding: 12,
+            borderRadius: 8,
+            alignItems: 'center',
       },
 })
 

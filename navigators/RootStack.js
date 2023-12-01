@@ -8,6 +8,9 @@ import Login from './../screens/Login';
 import Detalles from '../screens/Detalles';
 import Estrenados from '../screens/Estrenados';
 import Proximos from '../screens/Proximos';
+import Favoritos from '../screens/Favoritos';
+import Vistos from '../screens/Vistos';
+import Busqueda from '../screens/Busqueda';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +35,9 @@ const RootStack = () => {
                 <Stack.Screen name="Detalles" component={Detalles}/>
                 <Stack.Screen name="Estrenados" component={Estrenados}/>
                 <Stack.Screen name="Proximos" component={Proximos}/>
+                <Stack.Screen name="Favoritos" component={Favoritos}/>
+                <Stack.Screen name="Vistos" component={Vistos}/>
+                <Stack.Screen name="Busqueda" component={Busqueda}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
